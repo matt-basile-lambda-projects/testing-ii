@@ -6,9 +6,9 @@ export default function Count(props) {
     <div className="flex items-baseline my-3">
       <h3 className="text-2xl">Strikes: </h3>
       {props.strikes === 0 ? null : 
-      props.strikes === 1 ? <div className="bg-green-light rounded h-4 w-4 mx-2"></div> :
-     (<><div className="bg-green-light rounded h-4 w-4 mx-2"></div>
-      <div className="bg-green-light rounded h-4 w-4 mx-2"></div></>)
+      props.strikes === 1 ? <div data-testid="strikeDot" className="bg-green-light rounded h-4 w-4 mx-2"></div> :
+     (<><div data-testid="strikeDot" className="bg-green-light rounded h-4 w-4 mx-2"></div>
+      <div data-testid="strikeDot" className="bg-green-light rounded h-4 w-4 mx-2"></div></>)
       }
     </div>
     <div className="flex items-baseline my-3">

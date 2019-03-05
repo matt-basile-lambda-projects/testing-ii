@@ -92,7 +92,8 @@ class App extends Component {
 
   render() {
     return (
-      < div className="flex flex-wrap">
+      <div className="flex flex-wrap">
+      <h1 className="mx-auto w-full text-center my-3">Let's Play Ball</h1>
       <div className="w-full flex h-auto">
         <LineUp away roster={this.state.away}/>
         <ScoreBoard inning={this.state.inning}/>
@@ -120,7 +121,7 @@ class App extends Component {
       </div>
         
        
-      </div>
+    </div>
     );
   }
 }
