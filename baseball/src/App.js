@@ -29,22 +29,40 @@ class App extends Component {
     outs: 0,
     inning: 1,
     topInning: true,
+    homeOrder: 0,
+    awayOrder: 0,
   }
   nextAB = ()=>{
-    if(this.state.atBat <5){
-      this.setState({atBat: this.state.atBat+1})
+    if(this.state.topInning){
+      if(this.state.awayOrder <5){
+        this.setState({awayOrder: this.state.awayOrder+1})
+      } else{
+        this.setState({awayOrder: 0})
+      }
     } else{
-      this.setState({atBat: 0})
+      if(this.state.homeOrder <5){
+        this.setState({homeOrder: this.state.homeOrder+1})
+      } else{
+        this.setState({homeOrder: 0})
+      }
     }
+    
   }
  addStrike = e =>{
    e.preventDefault();
    if(this.state.strikes === 2){
+     if(this.state.outs === 2){
+      this.setState({ topInning: false, outs: 0, strikes: 0, balls: 0})
+      if(this.state.topInning === false){
+        this.setState({topInning: true, outs: 0, strikes: 0, balls: 0})
+      }
+     } else{
       this.setState({strikes: 0});
       this.setState({balls: 0});
       this.setState({outs: this.state.outs+1})
       this.nextAB();
    }
+  }
    if(this.state.strikes < 2){
      this.setState({strikes: this.state.strikes+1})
    }
@@ -71,6 +89,7 @@ class App extends Component {
  addHit = e =>{
    e.preventDefault()
  }
+
   render() {
     return (
       < div className="flex flex-wrap">
@@ -83,7 +102,9 @@ class App extends Component {
         <div className="w-full flex h-64 justify-center mx-auto">
           <div className="w-1/4 text-center self-center">
             <h2 className="text-2xl underline ">At Bat</h2>
-            <h2 className="text-4xl">{this.state.away[this.state.atBat]}</h2>
+            <h2 className="text-4xl">
+            {this.state.topInning ? this.state.away[this.state.atBat] : this.state.home[this.state.atBat]}
+            </h2>
           </div>
           <Count 
           strikes={this.state.strikes}
