@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Count from './Count'
 import ButtonPad from './Dashboard'
+import LineUp from './LineUp'
+import ScoreBoard from './ScoreBoard'
 
 class App extends Component {
   state={
@@ -24,7 +26,9 @@ class App extends Component {
     atBat: 0,
     strikes: 0,
     balls: 0,
-    outs: 0
+    outs: 0,
+    inning: 1,
+    topInning: true,
   }
   nextAB = ()=>{
     if(this.state.atBat <5){
@@ -69,20 +73,33 @@ class App extends Component {
  }
   render() {
     return (
-      <>
-        <h1>At Bat: {this.state.away[this.state.atBat]}</h1>
-        <Count 
-        strikes={this.state.strikes}
-        balls={this.state.balls}
-        outs={this.state.outs}
-        />
+      < div className="flex flex-wrap">
+      <div className="w-full flex h-auto">
+        <LineUp away roster={this.state.away}/>
+        <ScoreBoard inning={this.state.inning}/>
+        <LineUp  roster={this.state.home} />
+      </div>
+      <div className="w-full  border">
+        <div className="w-full flex h-64 justify-center mx-auto">
+          <div className="w-1/4 text-center self-center">
+            <h2 className="text-2xl underline ">At Bat</h2>
+            <h2 className="text-4xl">{this.state.away[this.state.atBat]}</h2>
+          </div>
+          <Count 
+          strikes={this.state.strikes}
+          balls={this.state.balls}
+          outs={this.state.outs}
+          />
+        </div>
         <ButtonPad 
         addStrike={this.addStrike} 
         addBall={this.addBall}
         addFoul={this.addFoul}
          />
-        <button onClick={e => this.nextAB(e)}>Next Batter</button>
-      </>
+      </div>
+        
+       
+      </div>
     );
   }
 }

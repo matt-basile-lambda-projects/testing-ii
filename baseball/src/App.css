@@ -31,3 +31,21 @@
     transform: rotate(360deg);
   }
 }
+
+
+.w-inning{
+  width: 7%;
+  border: 1px solid black;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.w-team-inning{
+  width: 8%;
+  border: 1px solid black;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
