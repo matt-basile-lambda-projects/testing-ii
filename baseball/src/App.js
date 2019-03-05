@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Count from './Count'
+import ButtonPad from './ButtonPad'
 
 class App extends Component {
+  state={
+    names: [
+      "Tony Gwynn",
+      "Ty Cobb",
+      "Wade Boggs",
+      "Lou Gehrig",
+      "Barry Bonds",
+      "Willie Mays"
+    ],
+    count: 0
+  }
+  nextAB = e =>{
+    e.preventDefault()
+    if(this.state.count <5){
+      this.setState({count: this.state.count+1})
+    } else{
+      this.setState({count: 0})
+    }
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <>
+        <h1>At Bat: {this.state.names[this.state.count]}</h1>
+        <Count />
+        <ButtonPad />
+      <button onClick={e => this.nextAB(e)}>Next Batter</button>
+      </>
     );
   }
 }
